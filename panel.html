@@ -6,8 +6,11 @@
       width: 100%;
     }
   </style>
+      <!--meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;"-->
+
 <head>
 <script src="ag-grid-community.min.noStyle.js"></script>
+<script src="chart.umd.min.js"></script>
 
   <link rel="stylesheet" href="ag-grid.css">
   <link rel="stylesheet" href="ag-theme-alpine.min.css">
@@ -15,6 +18,8 @@
     <body>
        
 <div id="gridContainer" style="height: 80%; width: 100%" class="ag-theme-alpine"></div>
+<canvas id="portfolioChart"></canvas>
+
  <script src="panel.js"></script>
     </body>
 </html>

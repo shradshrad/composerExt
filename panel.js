@@ -6,7 +6,7 @@ chrome.devtools.network.onRequestFinished.addListener(request => {
             response: body
         });
 	if(body != null){
-		createDynamic(body);
+		//createDynamic(body);
 	}
 	
       }
@@ -86,7 +86,7 @@ const jsonData = {
       {
         "ticker": "TMF",
         "amount": 1.847518642,
-        "percent_change": null,
+        "percent_change": 1,
         "current_price": 7.75,
         "value": 14.3182694755,
         "current_allocation": 0.274
@@ -97,15 +97,42 @@ const jsonData = {
   }
 };
 function createDynamic(data) {
+  //Allow columns to be sorted
   const columnDefs = [
-    { field: "ticker", headerName: "Ticker", width: 100 },
-    { field: "amount", headerName: "Amount", width: 100 },
-    { field: "current_price", headerName: "Current Price", width: 120 },
-    { field: "value", headerName: "Value", width: 100 },
-    { field: "current_allocation", headerName: "Current Allocation", width: 150 }
+    { field: "ticker", headerName: "Ticker", width: 100,      sortable: true,filter: true   },
+    { field: "amount", headerName: "Amount", width: 100,      sortable: true,filter: "agNumberColumnFilter", type: "numeric" },
+    { field: "percent_change", headerName: "Percentage Change", width: 150, sortable: true, filter: "agNumberColumnFilter",  type: "numeric",
+    cellRenderer: function(params) {
+     
+      if (params.value === null) {
+        return;
+      }
+      const value = parseFloat(params.value);
+      
+      const formattedValue = value >= 0 ? '+' + value.toFixed(2) + '%' : "-"+value.toFixed(2) + '%';
+      const color = value >= 0 ? 'green' : 'red';
+      return `<span style="color: ${color}">${formattedValue}</span>`;
+    }
+    },
+    { field: "current_price", headerName: "Current Price", width: 120,sortable: true,filter: "agNumberColumnFilter", type: "numeric" },
+    { field: "value", headerName: "Value", width: 100, sortable: true,filter: "agNumberColumnFilter", type: "numeric",
+  
+    //show dollar sign ahead of the value
+    cellRenderer: function(params) {
+      return '$' + params.value.toFixed(2);
+
+    },
+  },
+    { field: "current_allocation", headerName: "Current Allocation", width: 150, sortable: true,filter: "agNumberColumnFilter", type: "numeric",
+    //Convert value to percentage and show percentage sign after value
+    cellRenderer: function(params) {
+      return (params.value * 100).toFixed(2) + '%';
+     }
+    }
+    
   ];
 
-  const portfolioData = Object.values(data);
+  const portfolioData = Object.values(jsonData);
   const rowData = portfolioData.flatMap(item => item.holdings);
 
   const gridOptions = {
@@ -124,4 +151,5 @@ function createDynamic(data) {
 
 
 
-//createDynamic(jsonData);
+
+createDynamic(jsonData);
