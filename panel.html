@@ -7,10 +7,21 @@
     }
   </style>
       <!--meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;"-->
+      <style>
+        .chart-container {
+      display: inline-block;
+      width: 400px; /* Set the desired width for each chart container */
+      height: 300px; /* Set the desired height for each chart container */
+    }
 
+    #chartContainer {
+      text-align: center; /* Center align the charts */
+    }
+      </style>
 <head>
 <script src="ag-grid-community.min.noStyle.js"></script>
 <script src="chart.umd.min.js"></script>
+<script src="chartjs-plugin-datalabels.js"></script>
 
   <link rel="stylesheet" href="ag-grid.css">
   <link rel="stylesheet" href="ag-theme-alpine.min.css">
