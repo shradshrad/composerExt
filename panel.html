@@ -17,6 +17,45 @@
     #chartContainer {
       text-align: center; /* Center align the charts */
     }
+    .chart-container {
+      display: inline-block;
+      width: 400px; /* Set the desired width for each chart container */
+      height: 350px; /* Set the desired height for each chart container */
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .chart-title {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    #chartContainer {
+      text-align: center; /* Center align the charts */
+    }
+
+    .legend-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      margin-right: 5px;
+    }
+
+    .legend-label {
+      font-size: 14px;
+    }
       </style>
 <head>
 <script src="ag-grid-community.min.noStyle.js"></script>
@@ -30,6 +69,8 @@
   <button id="liveUpdates" >Start Updates</button>
 <div id="gridContainer" style="height: 80%; width: 100%" class="ag-theme-alpine"></div>
 <canvas id="portfolioChart"></canvas>
+<div id="chartContainer"></div>
+
 
  <script src="panel.js"></script>
     </body>
